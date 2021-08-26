@@ -1,0 +1,113 @@
+/* ./styles/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#030214] text-[#e033e7];
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.01;
+  }
+}
+
+h1 {
+  text-align: center;
+  font-size: 50px;
+  color: #0cf630;
+}
+
+h4 {
+  text-align: center;
+  font-size: 35px;
+}
+
+.neonGreen {
+  padding: 0 20px;
+  color: aliceblue;
+  text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #65df77,
+    0 0 80px #0cf630, 0 0 90px #0cf630, 0 0 100px #0cf630, 0 0 150px #0cf630;
+  /* text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
+    0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa; */
+  animation: flicker 1.5s infinite alternate;
+}
+
+.neonPink {
+  padding: 0 20px;
+  color: aliceblue;
+  text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #d971dd,
+    0 0 80px #e033e7, 0 0 90px #e033e7, 0 0 100px #e033e7, 0 0 150px #e033e7;
+  animation: flickerPink 1.5s infinite alternate;
+}
+
+.navbar {
+  padding: 0 20px;
+  color: aliceblue;
+  text-shadow: 0 0 4px #b332e6, 0 0 11px #b332e6, 0 0 19px #b332e6,
+    0 0 40px #d971dd, 0 0 80px #e033e7, 0 0 90px #e033e7, 0 0 100px #e033e7,
+    0 0 150px #e033e7;
+}
+
+@keyframes flickerGreen {
+  0%,
+  18%,
+  22%,
+  25%,
+  53%,
+  57%,
+  100% {
+    text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #65df77,
+      0 0 80px #0cf630, 0 0 90px #0cf630, 0 0 100px #0cf630, 0 0 150px #0cf630;
+  }
+  20%,
+  24%,
+  55% {
+    text-shadow: none;
+  }
+}
+
+@keyframes flickerPink {
+  0%,
+  18%,
+  22%,
+  25%,
+  53%,
+  57%,
+  100% {
+    text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #d971dd,
+      0 0 80px #e033e7, 0 0 90px #e033e7, 0 0 100px #e033e7, 0 0 150px #e033e7;
+  }
+  20%,
+  24%,
+  55% {
+    text-shadow: none;
+  }
+}
+
+.footer {
+  background: linear-gradient(#8632e600, #8632e6);
+  margin-top: auto;
+  height: 200px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+/*
+green - 0CF630
+pink - e033e7
+l purp - b332e6
+d purp - 8632e6
+blue - 5932e6
+black - 030214
+*/
