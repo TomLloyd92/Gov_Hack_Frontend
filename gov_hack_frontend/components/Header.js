@@ -1,5 +1,4 @@
-import Image from "next/dist/client/image";
-import logo from "../images/MetaDAO2.png"
+import ButtonNeon from "./ButtonNeon";
 import HeaderItem from "./HeaderItem";
 import {HomeIcon, LightningBoltIcon, SupportIcon, TemplateIcon  } from '@heroicons/react/outline'
 
@@ -16,13 +15,6 @@ function Header() {
             <div>
                 <h4 className='animate-pulse cursor-pointer hover:text-[#66FF00] transition duration-100 transform hover:scale-125'>METAVERSE DAO</h4>
             </div>
-            {/* <Icon className="h-8 mb-1"/>
-            {/* <Image
-                className="object-contain"
-                src={logo}
-                width={200}
-                height={100}
-            /> */}
         </header>
     )
 }

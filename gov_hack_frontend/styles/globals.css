@@ -103,6 +103,58 @@ h4 {
   right: 0;
 }
 
+.buttonNeon {
+  cursor: pointer;
+  border: #e033e7 0.125em solid;
+  padding: 0.25em 1em;
+  border-radius: 00.25em;
+
+  text-shadow: 0 0 0.125em white hsl(0 0% 100%/0.5) 0 0 0.25em #e033e7;
+
+  box-shadow: inset 0 0 0.5em 0 #e033e7, 0 0 0.5em 0 #e033e7;
+  position: relative;
+}
+
+.buttonNeon::before {
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  background: #e033e7;
+  top: 120%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  transform: perspective(0.9em) rotateX(40deg) scale(1, 0.55);
+  filter: blur(1.5em);
+  opacity: 0.6;
+}
+
+.buttonNeon:hover {
+  background: #e033e7;
+  color: black;
+}
+
+.buttonNeon::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  box-shadow: 0 0 2em 0.5em #e033e7;
+  opacity: 0;
+  transition: opacity 100ms linear;
+}
+
+.buttonNeon:hover::before {
+  transform: perspective(1em) rotateX(40deg) scale(1, 0.75);
+}
+
+.buttonNeon:hover::after {
+  opacity: 1;
+}
 /*
 green - 0CF630
 pink - e033e7

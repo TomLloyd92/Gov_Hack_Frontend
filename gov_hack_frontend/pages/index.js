@@ -2,7 +2,7 @@ import Nav from '../components/Nav'
 import Results from '../components/Results'
 import React, { Component } from 'react';
 import Layout from '../components/Layout';
-
+import ButtonNeon from '../components/ButtonNeon'
 
 class Home extends Component {
   render() {
