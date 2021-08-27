@@ -10,7 +10,8 @@ class Governance extends Component
   {
     return (
       <Layout>
-        <h1>GOVERNANCE</h1>
+        <h1 className="neonPink">[GOVERNANCE]
+        </h1>
         <div>
           <Nav/>
           <Results/>
