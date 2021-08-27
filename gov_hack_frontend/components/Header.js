@@ -11,10 +11,13 @@ function Header() {
                 <HeaderItem title='USER DASHBOARD' Icon={TemplateIcon}/>
                 <HeaderItem title='META TOKEN' Icon={SupportIcon}/>
             </div>
-
-            <div>
-                <h4 className='animate-pulse cursor-pointer hover:text-[#66FF00] transition duration-100 transform hover:scale-125'>METAVERSE DAO</h4>
+            <div className="md:pr-16 sm:pr-0 ">
+                <ButtonNeon/>
             </div>
+
+            {/* <div>
+                <h4 className='animate-pulse cursor-pointer hover:text-[#66FF00] transition duration-100 transform hover:scale-125'>METAVERSE DAO</h4>
+            </div> */}
         </header>
     )
 }

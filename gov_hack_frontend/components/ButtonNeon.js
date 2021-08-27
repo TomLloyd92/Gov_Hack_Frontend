@@ -1,7 +1,7 @@
 
 function ButtonNeon() {
     return (
-        <button className="buttonNeon">Connect Metamask</button>
+        <button className="buttonNeon p-2">Connect Metamask</button>
     )
 }
 
