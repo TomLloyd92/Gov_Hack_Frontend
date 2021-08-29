@@ -1,4 +1,4 @@
-import Nav from '../components/Nav'
+import GovNav from '../components/GovNav'
 import Results from '../components/Results'
 import React, { Component } from 'react';
 import Layout from '../components/Layout';
@@ -13,8 +13,8 @@ class Governance extends Component
         <h1 className="neonPink">[GOVERNANCE]
         </h1>
         <div>
-          <Nav/>
-          <Results/>
+        <GovNav />
+        <Results/>
         </div>
       </Layout>
   )}

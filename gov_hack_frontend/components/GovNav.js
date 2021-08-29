@@ -1,7 +1,7 @@
 import NavItem from "./NavItem";
 import {TableIcon, NewspaperIcon } from '@heroicons/react/outline'
 
-function Nav() {
+function GovNav() {
     return (
         <nav className="navbar">
             <div className='flex justify-center whitespace-nowrap space-x-10 '>
@@ -12,4 +12,4 @@ function Nav() {
     )
 }
 
-export default Nav;
+export default GovNav;
