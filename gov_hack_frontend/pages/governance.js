@@ -1,11 +1,21 @@
 import GovNav from '../components/GovNav'
-import Results from '../components/Results'
+import Results from '../components/ProposalResults'
 import React, { Component } from 'react';
 import Layout from '../components/Layout';
+import ProposalCard from '../components/ProposalCard';
 
 
 class Governance extends Component
 {
+
+constructor(){
+  this.state = {
+    showProposals: true,
+    showCreateProposal: false
+  }
+}
+
+
   render()
   {
     return (
