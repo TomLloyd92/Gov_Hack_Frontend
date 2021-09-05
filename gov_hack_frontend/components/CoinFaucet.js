@@ -1,7 +1,10 @@
 
 import React, {Component} from 'react';
 import web3 from '../ethereum/web3';
+import Faucet from '../ethereum/build/contracts/Faucet.json'
+import { FAUCET_ADDRESS, META_TOKEN_ADDRESS } from '../globals';
 
+//var Contract = require('web3-eth-contract');
 
 class CoinFaucet extends Component
 {
@@ -14,29 +17,18 @@ class CoinFaucet extends Component
        onSubmit =  async (event) =>
     {
         event.preventDefault();
-        const accounts = await web3.eth.getAccounts();
 
-        console.log(this.state.value);
-        console.log(accounts[0]);
-        /*
-        const campaign = Campaign(this.props.address);
-        this.setState({loading:true, errorMessage: ''});
+        var faucet = new web3.eth.Contract(Faucet.abi, FAUCET_ADDRESS);
 
         try{
             const accounts = await web3.eth.getAccounts();
-            await campaign.methods.contribute().send(
-                {
-                    from: accounts[0],
-                    value: web3.utils.toWei(this.state.value, 'ether')
-                });
-                //Refresh the page
-        Router.replaceRoute(`/campaigns/${this.props.address}`);
-        }catch (err){
-            this.setState({errorMessage: err.message});
-        }
-        */
 
-        this.setState({loading:false, value: ''});
+            await faucet.methods.reciveFunds(accounts[0], this.state.value).send({
+                from:accounts[0]
+            })
+        }catch(err){
+            console.log(err);
+        }
     };
 
 
