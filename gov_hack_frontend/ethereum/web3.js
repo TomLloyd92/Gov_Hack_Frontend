@@ -13,7 +13,9 @@ if (typeof window !== "undefined" && typeof window.ethereum !== "undefined") {
     // No meta mask
     const provider = new Web3.providers.HttpProvider(
         //Conect to the rinkby testnet
-        'https://rinkeby.infura.io/v3/74262c0a23484a4298c08c3dcb919a35'
+        'http://127.0.0.1:9545/'
+        
+        //'https://rinkeby.infura.io/v3/74262c0a23484a4298c08c3dcb919a35'
     );
     //Assign web3
     web3 = new Web3(provider);

@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import Layout from '../components/Layout';
-
+import DashBoardCards from '../components/DashBoardCards'
 
 class UserDashboard extends Component
 {
@@ -11,8 +11,7 @@ class UserDashboard extends Component
       <Layout>
         <h1 className="neonPink">[USER DASHBOARD]
         </h1>
-        <div>
-        </div>
+        <DashBoardCards/>
       </Layout>
   )}
 }

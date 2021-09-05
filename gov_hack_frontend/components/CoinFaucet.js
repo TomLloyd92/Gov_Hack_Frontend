@@ -1,5 +1,6 @@
 
 import React, {Component} from 'react';
+import web3 from '../ethereum/web3';
 
 
 class CoinFaucet extends Component
@@ -13,8 +14,10 @@ class CoinFaucet extends Component
        onSubmit =  async (event) =>
     {
         event.preventDefault();
+        const accounts = await web3.eth.getAccounts();
 
-        console.log(this.state.value)
+        console.log(this.state.value);
+        console.log(accounts[0]);
         /*
         const campaign = Campaign(this.props.address);
         this.setState({loading:true, errorMessage: ''});
