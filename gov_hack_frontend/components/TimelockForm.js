@@ -1,6 +1,7 @@
-import { ReceiptTaxIcon } from "@heroicons/react/outline"
-import { Component } from "react"
 
+import { Component } from "react"
+import Timelock from '../ethereum/build/contracts/Timelock.json'
+import { TIMELOCK_ADDRESS } from "../globals";
 
 class TimelockForm extends Component{
 
@@ -12,8 +13,40 @@ class TimelockForm extends Component{
         eta: ''
     };
 
-    onSubmit(){
-        console.log("YEETS")
+ onSubmit =  async (event) =>
+    {
+        event.preventDefault();
+
+        console.log(this.state.addresstarget)
+        console.log(this.state.value);
+        console.log(this.state.calldataSig);
+        console.log(this.state.calldataData);
+
+        return;
+        var timelock = new web3.eth.Contract(Timelock.abi, TIMELOCK_ADDRESS);
+
+        try{
+            const accounts = await web3.eth.getAccounts();
+
+            /*
+
+    function queueTransaction(
+        address target,
+        uint256 value,
+        string calldata signature,
+        bytes calldata data,
+        uint256 eta
+    ) external returns (bytes32);
+            */
+
+
+
+            await timelock.methods.queueTransaction(TIMELOCK_ADDRESS, this.state.value, this.state.calldataSig, this.state.calldataData, 0 ).send({
+                from:accounts[0]
+            })
+        }catch(err){
+            console.log(err);
+        }
     }
 
     render()
@@ -34,7 +67,7 @@ class TimelockForm extends Component{
                                     type="" 
                                     placeholder="Enter Target Address" 
                                     value={this.state.addresstarget}
-                                    onChange={event => this.setState({addresstarget: event.target.addresstarget})}
+                                    onChange={event => this.setState({addresstarget: event.target.value})}
                                     ></input>
                             </div>
                             <div className="pt-8">
@@ -54,7 +87,7 @@ class TimelockForm extends Component{
                                     type="" 
                                     placeholder="Enter Function Name and Arguments" 
                                     value={this.state.calldataSig}
-                                    onChange={event => this.setState({calldataSig: event.target.calldataSig})}
+                                    onChange={event => this.setState({calldataSig: event.target.value})}
                                     ></input>
                             </div>
                             <div className="pt-8">
@@ -64,13 +97,13 @@ class TimelockForm extends Component{
                                     type="" 
                                     placeholder="Enter Call Data" 
                                     value={this.state.calldataData}
-                                    onChange={event => this.setState({calldataData: event.target.calldataData})}
+                                    onChange={event => this.setState({calldataData: event.target.value})}
                                     ></input>
                             </div>
 
                         </div>
                         <button
-                            className="w-full h-16 text-lg font-extrabold text-white transition duration-300 bg-purple-600 rounded-b-lg hover:bg-purple-700">Que Function!</button>
+                            className="w-full h-16 text-lg font-extrabold text-white transition duration-300 bg-purple-600 rounded-b-lg hover:bg-purple-700">Queue Function!</button>
                     </div>
                 </div>
             </main>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GovNav from '../components/GovNav';
 import Layout from '../components/Layout';
-import TimelockForm from '../components/TimeloclForm';
+import TimelockForm from '../components/TimelockForm';
 
 class DevSetup extends Component {
   render() {
