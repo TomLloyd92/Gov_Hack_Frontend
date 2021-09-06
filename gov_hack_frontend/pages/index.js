@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Layout from '../components/Layout';
-
 class Home extends Component {
   render() {
     return (
@@ -8,10 +7,9 @@ class Home extends Component {
         <h1 className="neonPink">[HOME]
         </h1>
 
-
-
         {/* <main class="w-1/2  grid place-content-center min-h-full content-center	align-content: center"> */}
           <main className="px-40 py-6 mb-10 text-center ">
+
           <p >
           Hello Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
           Tempore ipsum magnam deleniti maxime accusamus eveniet praesentium voluptatibus id molestias? 
