@@ -1,7 +1,9 @@
 
 import { Component } from "react"
 import Timelock from '../ethereum/build/contracts/Timelock.json'
+import web3 from "../ethereum/web3";
 import { TIMELOCK_ADDRESS } from "../globals";
+
 
 class TimelockForm extends Component{
 
@@ -9,51 +11,95 @@ class TimelockForm extends Component{
         addresstarget:'',
         value: '',
         calldataSig:'',
-        calldataData: '',
-        eta: ''
+        calldataDataTypes: '',
+        calldataDataValues: '',
+        eta: '',
+        encodedData: ''
     };
+
 
  onSubmit =  async (event) =>
     {
+
+        /*
+        0xdBB3c808157907bd6c64938E5AdD1943A3d391d9
+        0
+        setPendingAdmin(address)
+        address
+        0xdBB3c808157907bd6c64938E5AdD1943A3d391d9
+        */
+       
+        //console.log(this.state.addresstarget)
+        //console.log(this.state.value);
+        //console.log(this.state.calldataSig);
+        //console.log(this.state.calldataDataTypes);
+        //console.log(this.state.calldataDataValues);
+
+        //Prevent Default
         event.preventDefault();
 
-        console.log(this.state.addresstarget)
-        console.log(this.state.value);
-        console.log(this.state.calldataSig);
-        console.log(this.state.calldataData);
-
-        return;
+        //Encode the data types and data
+        await this.setState({encodedData: web3.eth.abi.encodeParameters([this.state.calldataDataTypes], [this.state.calldataDataValues])});
+        
+        console.log(this.state.encodedData)
+        //Instance of Timelock
         var timelock = new web3.eth.Contract(Timelock.abi, TIMELOCK_ADDRESS);
+        
+        //Get current block
+        var currentBlock = await timelock.methods.getBlockTimestamp().call();
+        currentBlock = Number(currentBlock)
+        console.log(currentBlock);
+        var eta = await currentBlock + 100;
+        await this.setState({eta: eta});
+        console.log(this.state.eta);
 
+
+        // //Send Transaction
         try{
             const accounts = await web3.eth.getAccounts();
-
-            /*
-
-    function queueTransaction(
-        address target,
-        uint256 value,
-        string calldata signature,
-        bytes calldata data,
-        uint256 eta
-    ) external returns (bytes32);
-            */
-
-
-
-            await timelock.methods.queueTransaction(TIMELOCK_ADDRESS, this.state.value, this.state.calldataSig, this.state.calldataData, 0 ).send({
+            
+            await timelock.methods.queueTransaction(
+                TIMELOCK_ADDRESS,
+                this.state.value,
+                this.state.calldataSig,
+                this.state.encodedData,
+                this.state.eta ).send({
                 from:accounts[0]
             })
+
         }catch(err){
             console.log(err);
         }
     }
 
+    execute =  async (event) =>
+     {
+        //Instance of Timelock
+        var timelock = new web3.eth.Contract(Timelock.abi, TIMELOCK_ADDRESS);
+
+        try{
+            const accounts = await web3.eth.getAccounts();            
+
+                await timelock.methods.executeTransaction(
+                TIMELOCK_ADDRESS,
+                this.state.value,
+                this.state.calldataSig,
+                this.state.encodedData,
+                this.state.eta ).send({
+                from:accounts[0]
+           })
+        }
+           catch(err){
+            console.log(err);
+           }
+     }
+
+
     render()
     {
         return(
-               <form onSubmit={this.onSubmit}>
             <main className="grid w-full  place-content-center">
+                <form onSubmit={this.onSubmit}>
                 <div className="rounded-lg">
                     <div className="bg-[#8632e6] rounded-lg w-96">
                         <div className="px-10 pt-6 mb-10 text-center">
@@ -95,19 +141,35 @@ class TimelockForm extends Component{
                                     class="bg-[#e033e7] rounded w-full py-2 px-4 text-black text-center leading-tight focus:outline-none focus:bg-white focus:border-purple-500" 
                                     id="" 
                                     type="" 
-                                    placeholder="Enter Call Data" 
-                                    value={this.state.calldataData}
-                                    onChange={event => this.setState({calldataData: event.target.value})}
+                                    placeholder="Enter Call Data Types" 
+                                    value={this.state.calldataDataTypes}
+                                    onChange={event => this.setState({calldataDataTypes: event.target.value})}
+                                    ></input>
+                            </div>
+                                            <div className="pt-8">
+                                <input 
+                                    class="bg-[#e033e7] rounded w-full py-2 px-4 text-black text-center leading-tight focus:outline-none focus:bg-white focus:border-purple-500" 
+                                    id="" 
+                                    type="" 
+                                    placeholder="Enter Call Values" 
+                                    value={this.state.calldataDataValues}
+                                    onChange={event => this.setState({calldataDataValues: event.target.value})}
                                     ></input>
                             </div>
 
                         </div>
                         <button
-                            className="w-full h-16 text-lg font-extrabold text-white transition duration-300 bg-purple-600 rounded-b-lg hover:bg-purple-700">Queue Function!</button>
+                            className="w-full h-16 text-lg font-extrabold text-white transition duration-300 bg-purple-600 rounded-b-lg hover:bg-purple-700">Queue Function!
+                        </button>
+ 
                     </div>
                 </div>
-            </main>
-        </form>
+            </form>
+            <button
+                onClick={this.execute}
+                className="w-full h-16 text-lg font-extrabold text-white transition duration-300 bg-purple-600 rounded-b-lg hover:bg-purple-700">Execute Function!
+            </button>
+        </main>
         )
     }
 }

@@ -12,6 +12,7 @@ class ProposalResults extends Component{
 
   renderProposals(){
 
+    
     //Assign all properties to the card in each campaign 
     //const items = this.props.improvementProposals.map(address => {
     // const items = this.props.campaigns.map(address => {
