@@ -2,10 +2,9 @@ import GovNav from '../components/GovNav'
 import Results from '../components/ProposalResults'
 import React, { Component } from 'react';
 import Layout from '../components/Layout';
-import ProposalResults from '../components/ProposalResults';
 
 
-class Governance extends Component
+class Proposals extends Component
 {
 
 // constructor(){
@@ -25,10 +24,10 @@ class Governance extends Component
         <div>
         <GovNav />
         </div>
-        <ProposalResults></ProposalResults>
+  
 
       </Layout>
   )}
 }
 
-export default Governance;
+export default Proposals;

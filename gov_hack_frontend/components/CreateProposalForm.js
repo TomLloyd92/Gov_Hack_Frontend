@@ -1,11 +1,11 @@
 
 import { Component } from "react"
-import Timelock from '../ethereum/build/contracts/Timelock.json'
+import GovernorAlpha from "../ethereum/build/contracts/GovernorAlpha.json"
 import web3 from "../ethereum/web3";
-import { TIMELOCK_ADDRESS } from "../globals";
+import { GOV_ALPHA_ADDRESS } from "../globals";
 
 
-class TimelockForm extends Component{
+class CreateProposalForm extends Component{
 
     state = {
         addresstarget:'',
@@ -22,11 +22,12 @@ class TimelockForm extends Component{
     {
 
         /*
-        0x09a4A0BA7C63ECEfe8E7757224C40853e7a24840
+        
+        0xdBB3c808157907bd6c64938E5AdD1943A3d391d9
         0
         setPendingAdmin(address)
         address
-        0xdBB3c808157907bd6c64938E5AdD1943A3d391d9
+        0x09a4A0BA7C63ECEfe8E7757224C40853e7a24840
         */
        
         //console.log(this.state.addresstarget)
@@ -43,19 +44,18 @@ class TimelockForm extends Component{
         
         console.log(this.state.encodedData)
         //Instance of Timelock
-        var timelock = new web3.eth.Contract(Timelock.abi, TIMELOCK_ADDRESS);
+        var timelock = new web3.eth.Contract(GovernorAlpha.abi, GOV_ALPHA_ADDRESS);
         
         //Get current block
         var currentBlock = await timelock.methods.getBlockTimestamp().call();
         currentBlock = Number(currentBlock)
         console.log(currentBlock);
         var eta = await currentBlock + 100;
-
         await this.setState({eta: eta});
         console.log(this.state.eta);
 
 
-        //Send Transaction
+        // //Send Transaction
         try{
             const accounts = await web3.eth.getAccounts();
             
@@ -104,7 +104,7 @@ class TimelockForm extends Component{
                 <div className="rounded-lg">
                     <div className="bg-[#8632e6] rounded-lg w-96">
                         <div className="px-10 pt-6 mb-10 text-center">
-                            <div className="mb-0 text-3xl font-bold text-white">TIME LOCK</div>
+                            <div className="mb-0 text-3xl font-bold text-white">Create Proposal</div>
                             <span className="text-sm text-white space-y-6">
                             </span>
                             <div className="pt-8">
@@ -160,19 +160,19 @@ class TimelockForm extends Component{
 
                         </div>
                         <button
-                            className="w-full h-16 text-lg font-extrabold text-white transition duration-300 bg-purple-600 rounded-b-lg hover:bg-purple-700">Queue Function!
+                            className="w-full h-16 text-lg font-extrabold text-white transition duration-300 bg-purple-600 rounded-b-lg hover:bg-purple-700">Create Proposal!
                         </button>
  
                     </div>
                 </div>
             </form>
-            <button
+            {/* <button
                 onClick={this.execute}
                 className="w-full h-16 text-lg font-extrabold text-white transition duration-300 bg-purple-600 rounded-b-lg hover:bg-purple-700">Execute Function!
-            </button>
+            </button> */}
         </main>
         )
     }
 }
 
-export default TimelockForm;
+export default CreateProposalForm;

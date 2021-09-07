@@ -1,7 +1,7 @@
 import GovNav from '../components/GovNav'
 import React, { Component } from 'react';
 import Layout from '../components/Layout';
-import ProposalForm from '../components/ProposalForm'
+import CreateProposalForm from '../components/CreateProposalForm'
 
 
 class CreateProposal extends Component
@@ -24,8 +24,7 @@ class CreateProposal extends Component
         <div>
         <GovNav />
         </div>
-        <ProposalForm/>
-
+        <CreateProposalForm/>
 
       </Layout>
   )}

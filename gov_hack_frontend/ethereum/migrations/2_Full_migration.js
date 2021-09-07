@@ -4,6 +4,7 @@ const ErrorDecoder = artifacts.require("ErrorDecoder");
 const SafeMath = artifacts.require("SafeMath");
 const Timelock = artifacts.require("Timelock");
 const GovernorAlpha = artifacts.require("GovernorAlpha")
+const Number = artifacts.require("Number")
 
 const testAddress = '0x0687c9D588a481F8Fd546417b2FE94b50eA24102';
 const daysDelay = 0;
@@ -39,12 +40,17 @@ module.exports = async function (deployer) {
     const governorAlpha = await GovernorAlpha.deployed();
     const governorAlphaAddress = governorAlpha.address;
 
-       
+    //Number (Contract for testing)
+    await deployer.deploy(Number);
+    const number = await Number.deployed();
+    const numberAddress = number.address;
+    
     //console.log("ERROR DECODER ADDRESS: " + errorDecoderAddress);
     //console.log("SAFE MATH ADDRESS: " + safeMathAddress);
     console.log("META TOKEN ADDRESS: " + metaTokenAddress);
     console.log("FAUCET ADDRESS: " + faucetAddress);
-    console.log("TIMELOCK ADDRESS: " + timelockAddress)
-    console.log("GOV ALPHA ADDRESS: " + governorAlphaAddress)
+    console.log("TIMELOCK ADDRESS: " + timelockAddress);
+    console.log("GOV ALPHA ADDRESS: " + governorAlphaAddress);
+    console.log("NUMBER: " + numberAddress);
 };
 
